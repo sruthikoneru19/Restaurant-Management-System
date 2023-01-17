@@ -1,0 +1,32 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: API_GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: ADMIN-SERVICE
+        uri: 
+            lb://ADMIN-SERVICE
+        predicates:
+        - Path=/admin/** 
+
+      - id: AUTHENTICATION-SERVICE
+        uri: 
+            lb://AUTHENTICATION-SERVICE
+        predicates:
+        - Path=/admin/**
+        
+      - id: FLAT-SERVICE
+        uri: 
+            lb://FLAT-SERVICE
+        predicates:
+        - Path=/flat/** 
+        
+      - id: USER-SERVICE
+        uri: 
+            lb://USER-SERVICE
+        predicates:
+        - Path=/user/**   
